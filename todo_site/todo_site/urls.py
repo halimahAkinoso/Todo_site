@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from todo import views
 #from .import views
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     ##################### home_page ###########################################
     path('admin/', admin.site.urls),
@@ -28,3 +28,5 @@ urlpatterns = [
  path('del/<str:item_id>', views.remove, name="del"), 
 
 ]
+
+urlpatterns += staticfiles_urlpatterns()

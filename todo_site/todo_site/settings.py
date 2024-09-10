@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-=msi1dzrvl59h*i3%6bq%ptg8!+eq-+0e$z_$2l@hbup78%lqg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -75,18 +75,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'todo_site.wsgi.application'
 
+#DATABASE_URL=postgresql://tododb_d78c_user:uTH5HRYERNb4ETRymiXUqr4jVGf6YjLK@dpg-crfqnk56l47c73e40bh0-a.oregon-postgres.render.com/tododb_d78c
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
  #Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
-    'default': dj_database_url.config(        
+ 'default': dj_database_url.config(        
         # Replace this value with your local database's connection string.        
-        default='postgresql://postgres:postgres@localhost:5432/mysite',       
+        default='postgresql://tododb_d78c_user:uTH5HRYERNb4ETRymiXUqr4jVGf6YjLK@dpg-crfqnk56l47c73e40bh0-a.oregon-postgres.render.com/tododb_d78c',       
           conn_max_age=600    
           )
             }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -123,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
 
 
 # This production code might break development mode, so we check whether we're in DEBUG mode
