@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import dj_database_url
 from pathlib import Path
 import os
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,13 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=msi1dzrvl59h*i3%6bq%ptg8!+eq-+0e$z_$2l@hbup78%lqg'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
+  
 
 # Application definition
 
@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'todo_site.wsgi.application'
 
  #Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
- 'default': dj_database_url.config(        
-        # Replace this value with your local database's connection string.        
-        default='postgresql://tododb_d78c_user:uTH5HRYERNb4ETRymiXUqr4jVGf6YjLK@dpg-crfqnk56l47c73e40bh0-a.oregon-postgres.render.com/tododb_d78c',       
-          conn_max_age=600    
-          )
-            }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+DATABASES["default"]= dj_database_url.parse(config("DATABASE_URL"))
 
 
 # Password validation
